@@ -1,0 +1,58 @@
+﻿@model List<string>
+
+@{
+    ViewData["Title"] = "Качени CV-та";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center text-primary mb-4">📄 Качени CV-та</h2>
+
+    @if (Model.Count == 0)
+    {
+        <div class="alert alert-info text-center">
+            Няма качени файлове.
+        </div>
+    }
+    else
+    {
+        <table class="table table-dark table-striped table-hover text-center">
+            <thead class="bg-primary text-white">
+                <tr>
+                    <th>👤 Качено от</th>
+                    <th>📄 Име на файла</th>
+                    <th>📥 Изтегляне</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var file in Model)
+                {
+                    var parts = file.Split('_', 2);
+                    var emailPart = parts.Length > 1 ? parts[0] : "неизвестен";
+                    var uploader = emailPart.Replace("_at_", "@").Replace("_dot_", ".");
+                    var displayName = parts.Length > 1 ? parts[1] : file;
+
+                    <tr>
+                        <td class="text-light">@uploader</td>
+                        <td class="text-light fw-semibold">@displayName</td>
+                        <td>
+                            <div class="d-flex justify-content-center gap-2">
+                                <a class="btn btn-sm btn-success" href="~/cv/@file" target="_blank">
+                                    📥 Изтегли
+                                </a>
+                                <form asp-action="DeleteCV" method="post" onsubmit="return confirm('Сигурен ли си, че искаш да изтриеш този файл?');">
+                                    <input type="hidden" name="fileName" value="@file" />
+                                    <button type="submit" class="btn btn-sm btn-danger">🗑️ Изтрий</button>
+                                </form>
+                            </div>
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <div class="text-center mt-4">
+            <a asp-action="Index" class="btn btn-outline-secondary">⬅ Назад към Админ панел</a>
+        </div>
+    }
+</div>

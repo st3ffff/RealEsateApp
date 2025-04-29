@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using RealEstateApp.Models;
 using RealEstateApp.Data;
 using Microsoft.EntityFrameworkCore;
+using System.IO;
 
 namespace RealEstateApp.Controllers
 {
@@ -109,7 +110,34 @@ namespace RealEstateApp.Controllers
 
             return RedirectToAction(nameof(Messages));
         }
+        [Authorize(Roles = "Admin")]
+        public IActionResult CVs()
+        {
+            var cvDirectory = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "cv");
+            var files = Directory.GetFiles(cvDirectory)
+                                 .Select(f => Path.GetFileName(f))
+                                 .ToList();
 
+            return View(files);
+        }
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public IActionResult DeleteCV(string fileName)
+        {
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "cv", fileName);
+
+            if (System.IO.File.Exists(filePath))
+            {
+                System.IO.File.Delete(filePath);
+                TempData["Success"] = "✅ Файлът беше успешно изтрит.";
+            }
+            else
+            {
+                TempData["Error"] = "❌ Файлът не беше намерен.";
+            }
+
+            return RedirectToAction("CVs");
+        }
 
 
     }

@@ -2,22 +2,56 @@
     ViewData["Title"] = "Стани един от нас";
 }
 
-<div class="container mt-5">
-    <h2 class="text-center text-success mb-4">📄 Стани един от нас</h2>
-
-    <p class="text-center mb-4">
-        Искаш да станеш брокер? Качи своето CV и ще се свържем с теб!
-    </p>
-
-    <form asp-controller="JoinUs" asp-action="UploadCv" method="post" enctype="multipart/form-data">
-        <div class="mb-3">
-            <label for="cvFile" class="form-label">Избери своето CV (PDF/DOCX):</label>
-            <input type="file" name="cvFile" class="form-control" accept=".pdf,.doc,.docx" required />
-        </div>
-        <button type="submit" class="btn btn-primary">📤 Качи CV</button>
-    </form>
-
-    <div class="mt-5 text-center">
-        <img src="https://cdn.pixabay.com/photo/2017/08/02/01/01/job-2566122_1280.jpg" class="img-fluid rounded" style="max-height: 300px;" alt="Join our team" />
+<section class="py-5 bg-light border-bottom shadow-sm">
+    <div class="container text-center">
+        <h1 class="display-5 fw-bold">🤝 Стани част от нашия екип</h1>
+        <p class="lead text-muted mt-3">
+            Ако си мотивиран, енергичен и обичаш да общуваш с хора – изпрати ни своето CV и започни ново начало!
+        </p>
     </div>
-</div>
+</section>
+
+<section class="container py-5">
+    <div class="row text-center mb-5">
+        <div class="col-md-4">
+            <i class="fas fa-users fa-3x text-primary mb-3"></i>
+            <h5>Динамичен екип</h5>
+            <p class="text-muted">Работи с млади и амбициозни хора в позитивна среда.</p>
+        </div>
+        <div class="col-md-4">
+            <i class="fas fa-chart-line fa-3x text-success mb-3"></i>
+            <h5>Кариера и растеж</h5>
+            <p class="text-muted">Развивай уменията си и израствай заедно с нас.</p>
+        </div>
+        <div class="col-md-4">
+            <i class="fas fa-home fa-3x text-warning mb-3"></i>
+            <h5>Реални сделки</h5>
+            <p class="text-muted">Участвай в реални проекти в света на недвижимите имоти.</p>
+        </div>
+    </div>
+
+    <div class="card border-0 shadow-sm">
+        <div class="card-header bg-white text-center">
+            <h4 class="mb-0">📤 Изпрати своето CV</h4>
+        </div>
+        <div class="card-body">
+            <form method="post" enctype="multipart/form-data" asp-action="UploadCV">
+                <div class="mb-3 text-center">
+                    <input type="file" name="cvFile" class="form-control" required />
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary btn-lg">Изпрати</button>
+                </div>
+            </form>
+
+            @if (TempData["Success"] != null)
+            {
+                <div class="alert alert-success mt-3 text-center">@TempData["Success"]</div>
+            }
+            @if (TempData["Error"] != null)
+            {
+                <div class="alert alert-danger mt-3 text-center">@TempData["Error"]</div>
+            }
+        </div>
+    </div>
+</section>
