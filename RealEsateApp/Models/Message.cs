@@ -22,6 +22,8 @@ namespace RealEstateApp.Models
 
         public DateTime SentAt { get; set; }
 
+        //public DateTime SentOn { get; set; }
+
         public ApplicationUser? Sender { get; set; }
 
         public ApplicationUser? Receiver { get; set; }
