@@ -62,7 +62,9 @@ namespace RealEstateApp.Controllers
             {
                 var isBroker = await _userManager.IsInRoleAsync(user, "Broker");
 
-                if (User.IsInRole("Broker") || User.IsInRole("Admin") || isBroker)
+                // Ако си брокер, виждаш всички потребители
+                // Ако не си брокер, виждаш само брокери
+                if (User.IsInRole("Broker") || isBroker)
                 {
                     recipients.Add(new SelectListItem
                     {
@@ -73,14 +75,12 @@ namespace RealEstateApp.Controllers
             }
 
             ViewBag.Users = recipients;
-
-            ViewBag.Placeholder = User.IsInRole("Admin")
+            ViewBag.Placeholder = User.IsInRole("Broker")
                 ? "-- Избери потребител --"
-                : User.IsInRole("Broker") ? "-- Избери потребител --" : "-- Избери брокер --";
+                : "-- Избери брокер --";
 
             return View();
         }
-
 
 
 
