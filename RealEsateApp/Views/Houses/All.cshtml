@@ -86,7 +86,18 @@
                     <p class="card-text mb-2"><strong>Добавен от:</strong> @house.Agent.Email</p>
 
                     <div class="mt-auto">
-                        <a asp-controller="Messages" asp-action="Create" asp-route-id="@house.Agent.Id" class="btn btn-outline-primary btn-sm me-2">✉ Съобщение</a>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <a asp-controller="Messages" asp-action="Create" asp-route-id="@house.Id" class="btn btn-info">
+                                <i class="fas fa-envelope"></i> Съобщение
+                            </a>
+                        }
+                        else
+                        {
+                            <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-warning">
+                                <i class="fas fa-user-plus"></i> Регистрирай се, за да пишеш
+                            </a>
+                        }
                         <a asp-action="Details" asp-route-id="@house.Id" class="btn btn-primary btn-sm me-2">👁 Детайли</a>
 
                         @if (User.IsInRole("Admin") || (User.IsInRole("Broker") && house.AgentId.ToString() == User.FindFirst("sub")?.Value))

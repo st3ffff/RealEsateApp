@@ -392,5 +392,32 @@ main {
         background-color: transparent !important;
     }
 
+.navbar-nav .nav-link {
+    padding-left: 10px;
+    padding-right: 10px;
+    white-space: nowrap; /* Предотвратява разделянето на текста на два реда */
+}
+
+.navbar-collapse {
+    flex-wrap: nowrap; /* Предотвратява нагъчването и пренасянето */
+}
+
+.navbar {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.form-inline {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Добавя разстояние между полетата и бутоните */
+}
+
+.navbar-brand {
+    margin-right: 20px; /* Отдалечава логото малко повече от менюто */
+}
+
+
+
 
 

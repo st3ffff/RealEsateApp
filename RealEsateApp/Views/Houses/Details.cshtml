@@ -24,9 +24,19 @@
             <p class="card-text"><strong>Добавено от:</strong> @Model.Agent?.Email</p>
 
             <div class="d-flex gap-2 mt-4">
-                <a asp-controller="Messages" asp-action="Create" asp-route-id="@Model.Agent.Id" class="btn btn-outline-primary">
-                    ✉ Свържи се с агента
-                </a>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a asp-controller="Messages" asp-action="Create" asp-route-id="@Model.Agent.Id" class="btn btn-outline-primary">
+                        ✉ Свържи се с агента
+                    </a>
+                }
+                else
+                {
+                    <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-warning">
+                        <i class="fas fa-user-plus"></i> Регистрирай се, за да се свържеш с агента
+                    </a>
+                }
+
                 <a asp-action="All" class="btn btn-secondary">⬅️ Обратно към всички</a>
             </div>
         </div>

@@ -192,7 +192,7 @@ namespace RealEstateApp.Controllers
 
 
 
-
+        [Authorize(Roles = "Broker,Admin")]
         public async Task<IActionResult> Delete(Guid id)
         {
             await houseService.DeleteAsync(id);
@@ -200,12 +200,20 @@ namespace RealEstateApp.Controllers
             return RedirectToAction(nameof(All));
         }
 
+        [Authorize(Roles = "Broker,Admin")]
         public async Task<IActionResult> DeleteMine(Guid id)
         {
             var userId = Guid.Parse(userManager.GetUserId(User));
             var house = await houseService.GetByIdAsync(id);
 
-            if (house == null || house.AgentId != userId)
+            if (house == null)
+            {
+                return NotFound();
+            }
+
+            bool isAdmin = User.IsInRole("Admin");
+
+            if (house.AgentId != userId && !isAdmin)
             {
                 return Unauthorized();
             }
@@ -214,6 +222,7 @@ namespace RealEstateApp.Controllers
             TempData["Success"] = "Имотът беше изтрит успешно!";
             return RedirectToAction(nameof(Mine));
         }
+
 
 
         public async Task<IActionResult> Details(Guid id)
