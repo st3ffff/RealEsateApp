@@ -1,0 +1,22 @@
+﻿@model IEnumerable<RealEstateApp.Models.House>
+
+<h2>Резултати от търсенето за "@ViewBag.Keyword"</h2>
+
+@if (!Model.Any())
+{
+    <p>Няма намерени резултати.</p>
+}
+else
+{
+    <div class="list-group">
+        @foreach (var house in Model)
+        {
+            <div class="list-group-item">
+                <h5>@house.Title</h5>
+                <p>@house.Description</p>
+                <p>Цена: @house.Price лв.</p>
+                <p>Тип: @house.PropertyType.ToString()</p>
+            </div>
+        }
+    </div>
+}

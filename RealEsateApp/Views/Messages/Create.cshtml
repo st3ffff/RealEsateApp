@@ -1,0 +1,56 @@
+﻿@model RealEstateApp.Models.Message
+
+@{
+    ViewData["Title"] = "Изпрати съобщение";
+    var users = ViewBag.Users as IEnumerable<SelectListItem>;
+    string selectedId = ViewBag.PreSelectedUserId as string;
+}
+
+<h2 class="text-center">Изпрати съобщение</h2>
+<hr />
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <form asp-action="Create" method="post">
+            <div class="form-group mb-3">
+                <label asp-for="ReceiverId" class="form-label">Получател</label>
+                <select asp-for="ReceiverId" class="form-select form-select-lg border border-primary shadow-sm">
+                    <option value="">@ViewBag.Placeholder</option>
+                    @foreach (var user in users)
+                    {
+                        if (user.Value == selectedId)
+                        {
+                            <option value="@user.Value" selected>@user.Text</option>
+                        }
+                        else
+                        {
+                            <option value="@user.Value">@user.Text</option>
+                        }
+                    }
+                </select>
+                <span asp-validation-for="ReceiverId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Subject" class="form-label">Тема</label>
+                <input asp-for="Subject" class="form-control" />
+                <span asp-validation-for="Subject" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Content" class="form-label">Съобщение</label>
+                <textarea asp-for="Content" class="form-control" rows="5"></textarea>
+                <span asp-validation-for="Content" class="text-danger"></span>
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-success px-4">Изпрати</button>
+                <a asp-action="Inbox" class="btn btn-secondary">Назад</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

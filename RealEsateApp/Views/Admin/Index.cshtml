@@ -1,0 +1,84 @@
+﻿@model IEnumerable<(RealEstateApp.Models.ApplicationUser user, string role)>
+
+@{
+    ViewData["Title"] = "Админ Панел";
+}
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger text-center">
+        @TempData["Error"]
+    </div>
+}
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success text-center">
+        @TempData["Success"]
+    </div>
+}
+
+
+<div class="container mt-4">
+    <h2 class="text-center text-primary mb-2">👑 Админ Панел</h2>
+    <p class="text-muted text-center mb-4">Добре дошъл, @User.Identity.Name</p>
+
+    <div class="d-flex justify-content-center gap-3 mb-4">
+        <a class="btn btn-outline-primary" asp-controller="Houses" asp-action="All">📋 Всички имоти</a>
+        <a class="btn btn-outline-success" asp-controller="Search" asp-action="Index">🔍 Търсене</a>
+        <a class="btn btn-outline-info" asp-controller="Houses" asp-action="Mine">🧰 Моите имоти</a>
+        <a class="btn btn-outline-warning" asp-controller="Admin" asp-action="Messages">📬 Съобщения</a>
+
+    </div>
+
+    <div class="alert alert-warning text-center">
+        <strong>⚠️ Предстои:</strong> управление на потребители, статистики и други админ инструменти.
+    </div>
+
+    <hr class="mb-4" />
+
+    <div class="card shadow border-0">
+        <div class="card-header bg-dark text-white">
+            <h5 class="mb-0">👥 Потребители</h5>
+        </div>
+
+        <div class="card-body p-0">
+            <table class="table mb-0" style="color: #f8f9fa;">
+                <thead style="background-color: #343a40; color: #ffffff;">
+                    <tr>
+                        <th>Имейл</th>
+                        <th>Потребителско име</th>
+                        <th>Текуща роля</th>
+                        <th class="text-center">Смени роля</th>
+                        <th class="text-center">Изтриване</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var u in Model)
+                    {
+                        <tr style="background-color: #212529;">
+                            <td>@u.user.Email</td>
+                            <td>@u.user.UserName</td>
+                            <td>@u.role</td>
+                            <td class="text-center">
+                                <form asp-action="ChangeRole" method="post" class="d-flex justify-content-center align-items-center gap-2">
+                                    <input type="hidden" name="userId" value="@u.user.Id" />
+                                    <select name="newRole" class="form-select form-select-sm w-auto bg-dark text-white border-secondary">
+                                        <option value="Admin" selected="@(u.role == "Admin")">Admin</option>
+                                        <option value="Broker" selected="@(u.role == "Broker")">Broker</option>
+                                        <option value="PrivateUser" selected="@(u.role == "PrivateUser")">PrivateUser</option>
+                                    </select>
+                                    <button type="submit" class="btn btn-sm btn-warning">Смени</button>
+                                </form>
+                            </td>
+                            <td class="text-center">
+                                <form asp-action="DeleteUser" method="post">
+                                    <input type="hidden" name="userId" value="@u.user.Id" />
+                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Сигурен ли си, че искаш да изтриеш този потребител?')">Изтрий</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>

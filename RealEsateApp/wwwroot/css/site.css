@@ -1,0 +1,381 @@
+﻿:root {
+    --bg-light: #f5f7fa;
+    --bg-dark: #1e1e2f;
+    --text-light: #1a1a1a;
+    --text-dark: #f2f2f2;
+    --primary: #007bff;
+    --accent: #00b894;
+    --card-bg-light: #ffffff;
+    --card-bg-dark: #2a2a3c;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-light);
+    color: var(--text-light);
+    transition: all 0.3s ease-in-out;
+}
+
+/* Тъмна тема */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: var(--bg-dark);
+        color: var(--text-dark);
+    }
+
+    .card {
+        background-color: var(--card-bg-dark);
+        color: var(--text-dark);
+    }
+
+    .btn-primary {
+        background-color: var(--accent);
+        border-color: var(--accent);
+    }
+}
+
+/* Карта (флаш стил) */
+.card {
+    background-color: var(--card-bg-light);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: transform 0.2s;
+}
+
+    .card:hover {
+        transform: scale(1.02);
+    }
+
+.btn-primary {
+    background-color: var(--primary);
+    border: none;
+    padding: 10px 20px;
+    color: #fff;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+}
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+/* Изчистване на картите */
+.card {
+    background-color: var(--card-bg-light);
+    color: var(--text-light);
+}
+
+@media (prefers-color-scheme: dark) {
+    body, .container, .card {
+        background-color: var(--bg-dark);
+        color: var(--text-dark);
+    }
+
+    .navbar {
+        background-color: #111 !important;
+    }
+
+    .card {
+        background-color: var(--card-bg-dark);
+        color: var(--text-dark);
+    }
+
+    .btn-outline-primary {
+        color: #00bfff;
+        border-color: #00bfff;
+    }
+
+        .btn-outline-primary:hover {
+            background-color: #00bfff;
+            color: black;
+        }
+}
+
+/* Общ текст стил */
+body {
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.card-title {
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.card-text {
+    font-size: 0.95rem;
+}
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-dark);
+    color: var(--text-dark);
+    font-family: 'Segoe UI', sans-serif;
+    min-height: 100vh;
+    display: block;
+}
+main {
+    padding-bottom: 3rem; /* малко отстояние преди футъра */
+}
+.landing-container {
+    height: 85vh;
+    background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 3rem;
+    border-radius: 12px;
+    box-shadow: inset 0 0 0 1000px rgba(0,0,0,0.5);
+    margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+    .landing-container h1 {
+        font-size: 2rem;
+    }
+
+    .landing-container p {
+        font-size: 1.1rem;
+    }
+}
+.why-us-section {
+    background-color: #1e1e2f;
+    color: #ffffff;
+    border-top: 4px solid #00b894;
+    border-radius: 10px;
+    margin-top: 3rem;
+}
+ .why-us-section h2 {
+        font-weight: 700;
+        font-size: 2.2rem;
+    }
+.why-us-section .card {
+        transition: transform 0.2s ease;
+    }
+ .why-us-section .card:hover {
+            transform: scale(1.03);
+
+ }
+
+.how-it-works {
+    background-color: #f8f9fa;
+    color: #212529;
+    border-top: 4px solid #00b894;
+    margin-top: 3rem;
+    border-radius: 10px;
+    padding: 3rem 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dark-theme .how-it-works {
+    background-color: #1e1e2f;
+    color: #ffffff;
+}
+
+    .dark-theme .how-it-works .card {
+        background-color: #2c2c3e;
+        color: #ffffff;
+    }
+
+.popular-categories {
+    text-align: center;
+    margin-top: 60px;
+    color: white;
+}
+
+.category-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.category-card {
+    background-color: #1e1e2f;
+    border-radius: 20px;
+    padding: 30px 20px;
+    width: 160px;
+    height: 160px;
+    text-align: center;
+    color: #00e6e6;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+    .category-card:hover {
+        transform: scale(1.08);
+        background-color: #2e2e3f;
+        box-shadow: 0 6px 25px rgba(0, 255, 255, 0.4);
+    }
+
+    .category-card i {
+        font-size: 32px;
+        margin-bottom: 10px;
+    }
+
+    .category-card span {
+        font-size: 16px;
+        font-weight: 500;
+        color: #ffffff;
+    }
+/* Dark filter form for the housing section */
+.dark-filter-form {
+    background-color: #1f1f2e;
+    padding: 30px;
+    border-radius: 12px;
+    margin-bottom: 40px;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.05);
+}
+
+    .dark-filter-form label {
+        color: #ccc;
+        font-weight: 600;
+    }
+
+    .dark-filter-form .form-control,
+    .dark-filter-form .form-select {
+        background-color: #2a2a3b;
+        color: #fff;
+        border: 1px solid #444;
+        border-radius: 8px;
+    }
+
+        .dark-filter-form .form-control:focus,
+        .dark-filter-form .form-select:focus {
+            border-color: #00ffff;
+            box-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+            outline: none;
+        }
+
+    .dark-filter-form .btn-primary {
+        background: linear-gradient(90deg, #00c6ff, #007bff);
+        border: none;
+        font-weight: 600;
+        color: #fff;
+    }
+
+    .dark-filter-form .btn-secondary {
+        background-color: #444;
+        border: none;
+        color: #eee;
+    }
+
+    .dark-filter-form .btn:hover {
+        opacity: 0.9;
+    }
+
+/* ✨ Enhanced register/login card */
+.auth-card {
+    background: linear-gradient(to right, #1f1f2e, #2c2c3e);
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.05);
+    min-width: 500px;
+    transition: all 0.3s ease-in-out;
+}
+
+    .auth-card:hover {
+        box-shadow: 0 0 40px rgba(0, 255, 255, 0.08);
+    }
+
+    .auth-card h2 {
+        font-weight: bold;
+        color: #ffffff;
+    }
+
+    .auth-card .form-label {
+        color: #bbb;
+        font-weight: 600;
+    }
+
+    .auth-card .form-control {
+        background-color: #2e2e3d;
+        color: #fff;
+        border: 1px solid #444;
+        border-radius: 8px;
+        transition: border-color 0.3s;
+    }
+
+        .auth-card .form-control:focus {
+            border-color: #00ffff;
+            box-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+            outline: none;
+        }
+
+    .auth-card .btn-success {
+        background: linear-gradient(to right, #00c6ff, #0072ff);
+        border: none;
+        font-weight: 600;
+        transition: opacity 0.2s ease-in-out;
+    }
+
+        .auth-card .btn-success:hover {
+            opacity: 0.9;
+        }
+
+    .auth-card .form-icon {
+        margin-right: 10px;
+        color: #00ffff;
+    }
+
+.login-page {
+    position: relative;
+    min-height: 100vh;
+    background: url('/images/bg-login.jpg') no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+    z-index: 1;
+}
+
+    .login-page::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(15, 15, 25, 0.75); /* тъмна маска */
+        z-index: 2;
+    }
+
+    .login-page .auth-card {
+        position: relative;
+        z-index: 3;
+    }
+
+.login-bg {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/login-bg.jpg') no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.register-bg {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/images/register-bg.jpg') no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.table-dark td, .table-dark th {
+    color: #ffffff !important;
+}
+
+.table-dark tbody tr {
+    border-bottom: 1px solid #666;
+}
+
+.table-dark thead {
+    background-color: #1e1e2f;
+    color: #fff;
+}
+
+
+

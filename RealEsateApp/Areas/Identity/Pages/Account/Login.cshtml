@@ -1,0 +1,48 @@
+﻿@page
+@model LoginModel
+@{
+    ViewData["Title"] = "Вход";
+}
+
+<div class="d-flex justify-content-center align-items-center vh-100 login-bg text-light">
+    <div class="auth-card">
+        <h2 class="text-center mb-4">🔐 Вход в RealEsateApp</h2>
+        <form method="post">
+            <div class="form-group mb-3">
+                <label asp-for="Input.Email" class="form-label">Имейл</label>
+                <div class="input-group">
+                    <span class="input-group-text bg-dark border-0"><i class="fas fa-envelope form-icon"></i></span>
+                    <input asp-for="Input.Email" class="form-control" />
+                </div>
+                <span asp-validation-for="Input.Email" class="text-danger small"></span>
+            </div>
+
+            <div class="form-group mb-4">
+                <label asp-for="Input.Password" class="form-label">Парола</label>
+                <div class="input-group">
+                    <span class="input-group-text bg-dark border-0"><i class="fas fa-lock form-icon"></i></span>
+                    <input asp-for="Input.Password" class="form-control" />
+                </div>
+                <span asp-validation-for="Input.Password" class="text-danger small"></span>
+            </div>
+
+            <div class="form-check mb-4">
+                <input asp-for="Input.RememberMe" class="form-check-input" />
+                <label asp-for="Input.RememberMe" class="form-check-label">Запомни ме</label>
+            </div>
+
+            <div class="d-grid">
+                <button type="submit" class="btn btn-success">🔓 Вход</button>
+            </div>
+
+            <div class="text-center mt-3">
+                <p>Нямаш акаунт? <a asp-page="./Register" class="text-info">Регистрирай се</a></p>
+                <a asp-page="./ForgotPassword" class="small text-muted">Забравена парола?</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

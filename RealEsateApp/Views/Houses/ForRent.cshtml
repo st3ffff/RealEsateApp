@@ -1,0 +1,73 @@
+﻿@model IEnumerable<RealEstateApp.Models.House>
+@{
+    ViewData["Title"] = "Имоти под наем";
+}
+@{
+    var selectedCategory = ViewBag.SelectedCategory as string;
+    var allCategories = ViewBag.AllCategories as List<string>;
+    var minPrice = ViewBag.MinPrice as decimal?;
+    var maxPrice = ViewBag.MaxPrice as decimal?;
+}
+
+<form method="get" asp-action="ForRent" class="dark-filter-form mb-5">
+    <div class="row g-3 align-items-end">
+        <div class="col-md-4">
+            <label class="form-label">Категория</label>
+            <select name="category" class="form-select">
+                <option value="">Всички</option>
+                @foreach (var cat in allCategories ?? new List<string>())
+                {
+                    if (selectedCategory == cat)
+                    {
+                        <option value="@cat" selected>@cat</option>
+                    }
+                    else
+                    {
+                        <option value="@cat">@cat</option>
+                    }
+                }
+            </select>
+        </div>
+
+        <div class="col-md-2">
+            <label class="form-label">Мин. цена</label>
+            <input type="number" name="minPrice" class="form-control" placeholder="от"
+                   value="@minPrice" min="0" />
+        </div>
+
+        <div class="col-md-2">
+            <label class="form-label">Макс. цена</label>
+            <input type="number" name="maxPrice" class="form-control" placeholder="до"
+                   value="@maxPrice" min="0" />
+        </div>
+
+        <div class="col-md-2 d-grid">
+            <button type="submit" class="btn btn-primary">Филтрирай</button>
+        </div>
+
+        <div class="col-md-2 d-grid">
+            <a href="@Url.Action("ForSale", "Houses")" class="btn btn-secondary">Изчисти</a>
+        </div>
+    </div>
+</form>
+
+
+<h2 class="text-center mb-4">Имоти под наем</h2>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    @foreach (var house in Model)
+    {
+        <div class="col">
+            <div class="card h-100 shadow-sm">
+                <img src="@house.ImageUrl" class="card-img-top" alt="Снимка" style="height: 200px; object-fit: cover;" />
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">@house.Title</h5>
+                    <p class="card-text">@house.Description?.Substring(0, Math.Min(100, house.Description.Length))...</p>
+                    <p class="card-text"><strong>Цена:</strong> @house.Price лв</p>
+                    <p class="card-text"><strong>Категория:</strong> @house.Category</p>
+                    <a asp-action="Details" asp-route-id="@house.Id" class="btn btn-primary mt-auto">👁 Детайли</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

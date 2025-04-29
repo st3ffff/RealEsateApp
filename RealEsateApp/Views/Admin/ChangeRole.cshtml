@@ -1,0 +1,25 @@
+﻿@model RealEstateApp.Models.ChangeRoleViewModel
+
+@{
+    ViewData["Title"] = "Смени роля";
+}
+
+<h2 class="text-center mb-4">🔄 Смени роля на потребител</h2>
+
+<form method="post">
+    <div class="form-group">
+        <label>Имейл</label>
+        <input type="text" class="form-control" value="@Model.Email" readonly />
+    </div>
+
+    <div class="form-group mt-3">
+        <label>Текуща роля: <b>@Model.CurrentRole</b></label>
+    </div>
+
+    <div class="form-group mt-3">
+        <label>Нова роля</label>
+        <select asp-for="NewRole" class="form-control" asp-items="@(new SelectList(Model.AvailableRoles))"></select>
+    </div>
+
+    <button type="submit" class="btn btn-success mt-3">Потвърди</button>
+</form>

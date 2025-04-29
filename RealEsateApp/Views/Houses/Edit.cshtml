@@ -1,0 +1,59 @@
+﻿@using RealEstateApp.Models
+@model RealEstateApp.Models.House
+
+@{
+    ViewData["Title"] = "Редактирай имот";
+}
+
+<h2>Редактирай имот</h2>
+
+<form asp-action="Edit" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="Id" />
+
+    <div class="mb-3">
+        <label asp-for="Title" class="form-label">Заглавие</label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label">Описание</label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Price" class="form-label">Цена</label>
+        <input asp-for="Price" class="form-control" />
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="PropertyType" class="form-label">Тип</label>
+        <select asp-for="PropertyType" class="form-select" asp-items="Html.GetEnumSelectList<PropertyType>()">
+            <option value="">-- Избери тип --</option>
+        </select>
+        <span asp-validation-for="PropertyType" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Category" class="form-label">Тип на имота</label>
+        <select asp-for="Category" class="form-select" asp-items="Html.GetEnumSelectList<PropertyCategory>()">
+            <option value="">-- Избери тип --</option>
+        </select>
+        <span asp-validation-for="Category" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ImageUrl" class="form-label">Снимка (URL)</label>
+        <input asp-for="ImageUrl" class="form-control" />
+        <span asp-validation-for="ImageUrl" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Запази</button>
+    <a asp-action="Mine" class="btn btn-secondary ms-2">Назад</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

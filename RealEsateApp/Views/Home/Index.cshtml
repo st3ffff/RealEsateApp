@@ -1,0 +1,120 @@
+﻿@{
+    ViewData["Title"] = "Добре дошли";
+}
+
+<div class="landing-container text-center text-white d-flex flex-column justify-content-center align-items-center">
+    <h1 class="display-4 fw-bold mb-3">Добре дошли в RealEsateApp</h1>
+    <p class="lead mb-4">Намерете своя нов дом – бързо, лесно и сигурно.</p>
+
+    <div class="d-flex flex-wrap gap-3 justify-content-center">
+        <a asp-controller="Houses" asp-action="All" class="btn btn-primary btn-lg">Разгледай имоти</a>
+        @if (!User.Identity.IsAuthenticated)
+        { 
+        <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-outline-light btn-lg">Регистрирай се</a>
+        }
+    </div>
+</div>
+<section class="why-us-section text-center py-5">
+    <div class="container">
+        <h2 class="mb-4">Защо да изберете RealEsateApp?</h2>
+
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="col">
+                <div class="card h-100 bg-dark text-white shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">✔️ Лесна навигация</h5>
+                        <p class="card-text">Намерете имот за секунди с нашия интуитивен интерфейс.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100 bg-dark text-white shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">📍 Реални обяви</h5>
+                        <p class="card-text">Всички оферти се добавят от регистрирани и доверени агенти .</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100 bg-dark text-white shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">🔒 Сигурност</h5>
+                        <p class="card-text">Вашите данни са защитени и не се споделят с трети страни.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="how-it-works py-5">
+    <div class="container text-center">
+        <h2 class="mb-5">Как работи платформата?</h2>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="col">
+                <div class="card border-0 h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">1️⃣ Регистрирай се</h5>
+                        <p class="card-text">Създай безплатен акаунт и влез в света на недвижимите имоти.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card border-0 h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">2️⃣ Разгледай обявите</h5>
+                        <p class="card-text">Филтрирай по цена, тип и категория – намери точния имот.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card border-0 h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">3️⃣ Свържи се с брокер</h5>
+                        <p class="card-text">Изпрати съобщение директно до агента от страницата на имота.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="top-categories py-5">
+    <div class="container text-center">
+        <h2 class="mb-5">Популярни категории имоти</h2>
+        <div class="row row-cols-2 row-cols-md-4 g-4">
+
+            <div class="col">
+                <a asp-controller="Houses" asp-action="All" asp-route-category="Къща" class="category-card text-decoration-none">
+                    <i class="bi bi-house-door-fill category-icon"></i>
+                    <p class="mt-2">Къщи</p>
+                </a>
+            </div>
+
+            <div class="col">
+                <a asp-controller="Houses" asp-action="All" asp-route-category="Апартамент" class="category-card text-decoration-none">
+                    <i class="bi bi-building category-icon"></i>
+                    <p class="mt-2">Апартаменти</p>
+                </a>
+            </div>
+
+            <div class="col">
+                <a asp-controller="Houses" asp-action="All" asp-route-category="Парцел" class="category-card text-decoration-none">
+                    <i class="bi bi-tree-fill category-icon"></i>
+                    <p class="mt-2">Парцели</p>
+                </a>
+            </div>
+
+            <div class="col">
+                <a asp-controller="Houses" asp-action="All" asp-route-category="Гараж" class="category-card text-decoration-none">
+                    <i class="bi bi-box-fill category-icon"></i>
+                    <p class="mt-2">Гаражи</p>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+

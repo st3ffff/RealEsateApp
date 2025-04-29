@@ -1,0 +1,44 @@
+﻿@model IEnumerable<RealEstateApp.Models.Message>
+
+@{
+    ViewData["Title"] = "Админ - Съобщения";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center text-info mb-4">📨 Админ - Всички съобщения</h2>
+
+    <div class="table-responsive shadow-sm">
+        <table class="table table-dark table-bordered table-hover text-center align-middle">
+            <thead style="background-color: #343a40; color: #ffffff;">
+                <tr>
+                    <th>📧 Изпратено от</th>
+                    <th>👤 Получател</th>
+                    <th>💬 Съобщение</th>
+                    <th>🕒 Изпратено на</th>
+                    <th>❌ Изтрий</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var message in Model)
+                {
+                    <tr>
+                        <td>@message.Sender?.Email</td>
+                        <td>@message.Receiver?.Email</td>
+                        <td class="text-start">@message.Content</td>
+                        <td>@message.SentAt.ToString("g")</td>
+                        <td>
+                            <form asp-action="DeleteMessage" method="post">
+                                <input type="hidden" name="id" value="@message.Id" />
+                                <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Сигурен ли си, че искаш да изтриеш това съобщение?')">Изтрий</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="text-center mt-4">
+        <a asp-action="Index" class="btn btn-outline-secondary">⬅ Назад към Админ панел</a>
+    </div>
+</div>

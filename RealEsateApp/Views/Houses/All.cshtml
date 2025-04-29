@@ -1,0 +1,102 @@
+﻿@model IEnumerable<RealEstateApp.Models.House>
+
+@using Microsoft.AspNetCore.Identity
+@using RealEstateApp.Models
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    ViewData["Title"] = "Всички имоти";
+
+    var selectedCategory = ViewBag.SelectedCategory as string;
+    var allCategories = ViewBag.AllCategories as List<string>;
+    var minPrice = ViewBag.MinPrice as decimal?;
+    var maxPrice = ViewBag.MaxPrice as decimal?;
+}
+
+<h2 class="text-center mb-4">Всички имоти</h2>
+
+<!-- ФИЛТЪР -->
+<form method="get" asp-action="All" class="dark-filter-form">
+    <div class="row g-3 align-items-end">
+        <div class="col-md-4">
+            <label class="form-label">Категория</label>
+            <select name="category" class="form-select">
+                <option value="">Всички</option>
+                @foreach (var cat in ViewBag.AllCategories as List<string>)
+                {
+                    <option value="@cat" selected="@(cat == ViewBag.SelectedCategory ? "selected" : null)">
+                        @cat
+                    </option>
+                }
+            </select>
+        </div>
+
+        <div class="col-md-2">
+            <label class="form-label">Мин. цена</label>
+            <input type="number" name="minPrice" class="form-control" value="@ViewBag.MinPrice" placeholder="от" min="0" />
+        </div>
+
+        <div class="col-md-2">
+            <label class="form-label">Макс. цена</label>
+            <input type="number" name="maxPrice" class="form-control" value="@ViewBag.MaxPrice" placeholder="до" min="0" />
+        </div>
+
+        <div class="col-md-2 d-grid">
+            <button type="submit" class="btn btn-primary">Филтрирай</button>
+        </div>
+
+        <div class="col-md-2 d-grid">
+            <a href="@Url.Action("All", "Houses")" class="btn btn-secondary">Изчисти</a>
+        </div>
+    </div>
+</form>
+
+
+<!-- ДОБАВИ ИМОТ -->
+@if (User.IsInRole("Admin") || User.IsInRole("Broker"))
+{
+    <div class="text-end mb-4">
+        <a asp-action="Add" class="btn btn-success">+ Добави имот</a>
+    </div>
+}
+
+<!-- СПИСЪК С ИМОТИ -->
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    @foreach (var house in Model)
+    {
+        <div class="col">
+            <div class="card h-100 shadow-sm">
+                @if (!string.IsNullOrWhiteSpace(house.ImageUrl))
+                {
+                    <img src="@house.ImageUrl" class="card-img-top" alt="Снимка на имота" style="height: 200px; object-fit: cover;" />
+                }
+                else
+                {
+                    <div class="bg-secondary text-white d-flex align-items-center justify-content-center" style="height: 200px;">
+                        <span>Няма снимка</span>
+                    </div>
+                }
+
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">@house.Title</h5>
+                    <p class="card-text">@house.Description?.Substring(0, Math.Min(100, house.Description.Length))...</p>
+                    <p class="card-text mb-1"><strong>Цена:</strong> @house.Price лв</p>
+                    <p class="card-text mb-1"><strong>Тип:</strong> @(house.PropertyType == PropertyType.ForSale ? "За продажба" : "Под наем")</p>
+                    <p class="card-text mb-1"><strong>Категория:</strong> @house.Category</p>
+                    <p class="card-text mb-2"><strong>Добавен от:</strong> @house.Agent.Email</p>
+
+                    <div class="mt-auto">
+                        <a asp-controller="Messages" asp-action="Create" asp-route-id="@house.Agent.Id" class="btn btn-outline-primary btn-sm me-2">✉ Съобщение</a>
+                        <a asp-action="Details" asp-route-id="@house.Id" class="btn btn-primary btn-sm me-2">👁 Детайли</a>
+
+                        @if (User.IsInRole("Admin") || (User.IsInRole("Broker") && house.AgentId.ToString() == User.FindFirst("sub")?.Value))
+                        {
+                            <a class="btn btn-warning btn-sm me-2" asp-action="Edit" asp-route-id="@house.Id">✏️ Редактирай</a>
+                            <a class="btn btn-danger btn-sm" asp-action="DeleteMine" asp-route-id="@house.Id">🗑 Изтрий</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
