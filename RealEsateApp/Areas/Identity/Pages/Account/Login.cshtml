@@ -7,6 +7,13 @@
 <div class="d-flex justify-content-center align-items-center vh-100 login-bg text-light">
     <div class="auth-card">
         <h2 class="text-center mb-4">🔐 Вход в RealEsateApp</h2>
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="alert alert-danger text-center">
+                @Html.ValidationSummary()
+            </div>
+        }
+
         <form method="post">
             <div class="form-group mb-3">
                 <label asp-for="Input.Email" class="form-label">Имейл</label>
@@ -37,7 +44,9 @@
 
             <div class="text-center mt-3">
                 <p>Нямаш акаунт? <a asp-page="./Register" class="text-info">Регистрирай се</a></p>
+                @*
                 <a asp-page="./ForgotPassword" class="small text-muted">Забравена парола?</a>
+                *@
             </div>
         </form>
     </div>

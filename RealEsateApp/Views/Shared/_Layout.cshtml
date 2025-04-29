@@ -90,9 +90,22 @@
                             <form asp-area="Identity" asp-page="/Account/Logout" method="post" class="mb-0">
                                 <button type="submit" class="btn btn-outline-danger">Изход</button>
                             </form>
+
+
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <div class="text-success text-end" style="margin-left: 20px; margin-right: 15px;">
+                                    Здравей,<br />
+                                    @User.Identity.Name
+                                </div>
+
+
+                            }
+
+
                             @if (User.IsInRole("Admin"))
                             {
-                                <span class="nav-link text-success">Здравей, @User.Identity.Name</span>
+                                //<span class="nav-link text-success">Здравей, @User.Identity.Name</span>
                                 <a class="nav-link text-light" asp-controller="Admin" asp-action="Index">👑 Админ Панел</a>
                             }
                         }
