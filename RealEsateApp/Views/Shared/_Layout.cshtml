@@ -48,6 +48,25 @@
                         {
                             <li class="nav-item"><a class="nav-link text-light" asp-controller="Messages" asp-action="Create">Ново съобщение</a></li>
                         }
+                        @using Microsoft.AspNetCore.Identity
+                        @inject UserManager<RealEstateApp.Models.ApplicationUser> UserManager
+                        @inject SignInManager<RealEstateApp.Models.ApplicationUser> SignInManager
+
+                        @{
+                            var isLoggedIn = SignInManager.IsSignedIn(User);
+                            var isAdmin = User.IsInRole("Admin");
+                            var isBroker = User.IsInRole("Broker");
+                        }
+                        @if (User.Identity.IsAuthenticated)
+                        @if (!isLoggedIn || (!isAdmin && !isBroker))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-info fw-bold" asp-controller="JoinUs" asp-action="Index">
+                                    🤝 Стани един от нас
+                                </a>
+                            </li>
+                        }
+
                     </ul>
 
                     <div class="d-flex ms-auto align-items-center">
