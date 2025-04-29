@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RealEstateApp.Data;
 
@@ -11,9 +12,10 @@ using RealEstateApp.Data;
 namespace RealEsateApp.Migrations
 {
     [DbContext(typeof(HouseRentingDbContext))]
-    partial class HouseRentingDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250429223833_FixFavoriteHouseUserId")]
+    partial class FixFavoriteHouseUserId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -237,7 +239,7 @@ namespace RealEsateApp.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("FavoriteHouses", (string)null);
+                    b.ToTable("FavoriteHouses");
                 });
 
             modelBuilder.Entity("RealEstateApp.Models.House", b =>
@@ -274,7 +276,7 @@ namespace RealEsateApp.Migrations
 
                     b.HasIndex("AgentId");
 
-                    b.ToTable("Houses", (string)null);
+                    b.ToTable("Houses");
                 });
 
             modelBuilder.Entity("RealEstateApp.Models.Message", b =>
@@ -308,7 +310,7 @@ namespace RealEsateApp.Migrations
 
                     b.HasIndex("SenderId");
 
-                    b.ToTable("Messages", (string)null);
+                    b.ToTable("Messages");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>

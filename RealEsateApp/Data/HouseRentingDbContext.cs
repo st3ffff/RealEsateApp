@@ -10,7 +10,6 @@ namespace RealEstateApp.Data
         public HouseRentingDbContext(DbContextOptions<HouseRentingDbContext> options)
             : base(options)
         { }
-
         public DbSet<House> Houses { get; set; }
 
         public DbSet<Message> Messages { get; set; }
@@ -35,6 +34,7 @@ namespace RealEstateApp.Data
                 .WithMany()
                 .HasForeignKey(m => m.ReceiverId)
                 .OnDelete(DeleteBehavior.Restrict);
+
         }
 
     }
