@@ -376,6 +376,21 @@ main {
     background-color: #1e1e2f;
     color: #fff;
 }
+.joinus-hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/img/team.jpg') no-repeat center center;
+    background-size: cover;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    color: white;
+}
+
+    .joinus-hero .container {
+        background-color: transparent !important;
+    }
+
+    .joinus-hero h1, .joinus-hero p {
+        background-color: transparent !important;
+    }
 
 
 

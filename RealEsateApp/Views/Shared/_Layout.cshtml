@@ -28,10 +28,16 @@
                         <li class="nav-item"><a class="nav-link text-light" asp-controller="Home" asp-action="Privacy">Privacy</a></li>
                         <li class="nav-item"><a class="nav-link text-light" asp-controller="Houses" asp-action="All">Всички имоти</a></li>
 
-                        @if (User.Identity.IsAuthenticated)
+                        @using Microsoft.AspNetCore.Identity
+                        @inject UserManager<IdentityUser> UserManager
+
+                        @if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Broker")))
                         {
-                            <li class="nav-item"><a class="nav-link text-light" asp-controller="Houses" asp-action="Mine">Моите имоти</a></li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-controller="Houses" asp-action="Mine">Моите имоти</a>
+                            </li>
                         }
+
                         <li class="nav-item"><a class="nav-link text-light" asp-controller="Houses" asp-action="ForRent">Под наем</a></li>
                         <li class="nav-item"><a class="nav-link text-light" asp-controller="Houses" asp-action="ForSale">За продажба</a></li>
 
